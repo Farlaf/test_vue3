@@ -1,8 +1,15 @@
 <template>
     <h1>Посты</h1>
-    <my-button
-        @click="makeDialogVisible"
-    >Добавить пост</my-button>
+    <div class="app__controls">
+        <my-button @click="makeDialogVisible">
+            Добавить пост
+        </my-button>
+        <my-select
+         v-model="selectedSort"
+         :options="sortOptions"
+        />
+    </div>
+
 
     <my-dialog v-model:show="dialogVisible">
         <post-form
@@ -33,6 +40,11 @@ export default {
             body: '',
             dialogVisible: false,
             isPostsLoading: false,
+            selectedSort: '',
+            sortOptions: [
+                {value: 'title', name: 'по Названию'},
+                {value: 'description', name: 'по Описанию'}
+            ]
         }
     },
     methods: {
@@ -64,13 +76,17 @@ export default {
 </script>
 
 <style>
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-}
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
 
-body {
-    padding: 20px;
-}
+    body {
+        padding: 20px;
+    }
+    .app__controls {
+        display: flex;
+        justify-content: space-between;
+    }
 </style>
