@@ -43,7 +43,7 @@ export default {
             selectedSort: '',
             sortOptions: [
                 {value: 'title', name: 'по Названию'},
-                {value: 'description', name: 'по Описанию'}
+                {value: 'body', name: 'по Описанию'}
             ]
         }
     },
@@ -71,6 +71,13 @@ export default {
     },
     mounted() {
         this.fetchPosts();
+    },
+    watch: {
+        selectedSort(newValue) {
+            this.posts.sort((post1, post2) => {
+                return post1[newValue]?.localeCompare(post2[newValue])
+            })
+        }
     }
 }
 </script>
